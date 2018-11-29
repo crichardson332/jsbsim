@@ -30,29 +30,9 @@
 # define SG_WARN		1
 # define SG_LOG(type, level, message) (type) ? (std::cerr <<message << endl) : (std::cout <<message << endl)
 #endif
-namespace boost {
-  template <bool B, class T = void>
-  struct enable_if_c {
-    typedef T type;
-  };
 
-  template <class T>
-  struct enable_if_c<false, T> {};
+#include <boost/utility/enable_if.hpp>
 
-  template <class Cond, class T = void>
-  struct enable_if : public enable_if_c<Cond::value, T> {};
-
-  template <bool B, class T = void>
-  struct disable_if_c {
-    typedef T type;
-  };
-
-  template <class T>
-  struct disable_if_c<true, T> {};
-
-  template <class Cond, class T = void>
-  struct disable_if : public disable_if_c<Cond::value, T> {};
-}
 #else
 # include <boost/utility.hpp>
 # include <boost/type_traits/is_enum.hpp>
@@ -224,7 +204,7 @@ public:
      */
     virtual simgear::props::Type getType() const = 0;
     virtual ~SGRaw() {}
-    
+
     /**
      * Create a new deep copy of this raw value.
      *
@@ -240,7 +220,7 @@ public:
 class SGRawExtended : public SGRaw
 {
 public:
-    /**    
+    /**
      * Make an SGRawValueContainer from the SGRawValue.
      *
      * This is a virtual function of SGRawExtended so that
@@ -1152,7 +1132,7 @@ public:
    * Set all of the mode attributes for the property node.
    */
   void setAttributes (int attr) { _attr = attr; }
-  
+
 
   //
   // Leaf Value (primitive).
@@ -1286,7 +1266,7 @@ public:
   {
     return setValue(&val[0]);
   }
-  
+
   /**
    * Set relative node to given value and afterwards make read only.
    *
@@ -1346,7 +1326,7 @@ public:
    * Print the value of the property to a stream.
    */
   std::ostream& printOn(std::ostream& stream) const;
-  
+
   //
   // Data binding.
   //

@@ -216,3 +216,11 @@ add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 ################################################################################
 
 add_subdirectory(utils)
+
+install(
+  DIRECTORY aircraft data_output data_plot engine scripts systems
+  DESTINATION etc/JSBSim
+  PATTERN *.cvsignore EXCLUDE
+  PATTERN INSTALL EXCLUDE
+  PATTERN Makefile.am EXCLUDE
+  )

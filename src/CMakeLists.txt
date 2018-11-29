@@ -117,5 +117,9 @@ endif()
 add_executable(JSBSim JSBSim.cpp)
 target_link_libraries(JSBSim libJSBSim)
 
-install(TARGETS JSBSim RUNTIME DESTINATION bin COMPONENT runtime)
+option(INSTALL_JSBSIM_EXEC "INSTALL_JSBSIM_EXEC" OFF)
+if (INSTALL_JSBSIM_EXEC)
+  install(TARGETS JSBSim RUNTIME DESTINATION bin)
+endif()
+
 install(FILES ${HEADERS} DESTINATION include/JSBSim COMPONENT devel)
